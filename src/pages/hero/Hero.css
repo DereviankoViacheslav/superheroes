@@ -1,0 +1,8 @@
+.hero__image-list {
+  display: flex;
+}
+
+.hero__image-list img {
+  height: 150px;
+  width: 250px;
+}

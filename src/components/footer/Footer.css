@@ -1,0 +1,20 @@
+.footer {
+  grid-area: footer;
+  background: rgb(95, 95, 94);
+}
+
+.footer__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+}
+
+.footer__content .link {
+  font-weight: bold;
+  color: #fff;
+}
+
+.footer__content .link:hover {
+  color: rgb(200, 93, 214);
+}

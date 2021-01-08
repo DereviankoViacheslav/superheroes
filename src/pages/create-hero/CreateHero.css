@@ -1,0 +1,48 @@
+.create-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.create-hero__form {
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.create-hero__form label {
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.create-hero__form label input {
+  padding: 10px 15px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.create-hero__form label textarea {
+  min-width: 207px;
+  padding: 10px;
+  border-radius: 5px;
+  resize: none;
+  outline: none;
+}
+
+.create-hero__btn {
+  padding: 15px;
+  font-weight: bold;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.create-hero__btn:hover {
+  color: #fff;
+  background: rgb(140, 16, 165);
+  cursor: pointer;
+}
