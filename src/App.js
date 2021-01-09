@@ -3,22 +3,23 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "../src/routes";
 import Header from "../src/components/header";
 import Footer from "../src/components/footer";
-import { MockDataProvider } from "./context/mock-data";
+import { Provider } from "react-redux";
+import { store } from "./store";
 import "./App.css";
 
 function App() {
   return (
-    <Router className="grid">
-      <Header />
-      <main className="main">
-        <div className="container">
-          <MockDataProvider>
+    <Provider store={store}>
+      <Router className="grid">
+        <Header />
+        <main className="main">
+          <div className="container">
             <Routes />
-          </MockDataProvider>
-        </div>
-      </main>
-      <Footer />
-    </Router>
+          </div>
+        </main>
+        <Footer />
+      </Router>
+    </Provider>
   );
 }
 

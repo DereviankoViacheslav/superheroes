@@ -1,4 +1,5 @@
-import React, { createContext, useReducer } from "react";
+import { createStore } from "redux";
+import * as actions from "./heroes.actions";
 
 const initialState = [
   {
@@ -11,7 +12,10 @@ const initialState = [
       "solar energy absorption and healing factor, solar flare and heat vision, solar invulnerability, flight...",
     catch_phrase:
       "Look, up in the sky, it's a bird, it's a plane, it's Superman!",
-    images: [],
+    images: [
+      "https://imgtest.mir24.tv/uploaded/images/crops/2018/December/870x489_0x6_detail_crop_f5a363c940799cf0289129b498fd9999437b7beb5ef00b5eaab3d7eeaca64849.jpg",
+      "https://ichef.bbci.co.uk/news/640/amz/worldservice/live/assets/images/2015/09/03/150903150823_ancient_hippolyta_amazon_624x351_warnerbros.jpg",
+    ],
   },
   {
     id: "1234",
@@ -23,7 +27,10 @@ const initialState = [
       "solar energy absorption and healing factor, solar flare and heat vision, solar invulnerability, flight...",
     catch_phrase:
       "Look, up in the sky, it's a bird, it's a plane, it's Superman!",
-    images: [],
+    images: [
+      "https://imgtest.mir24.tv/uploaded/images/crops/2018/December/870x489_0x6_detail_crop_f5a363c940799cf0289129b498fd9999437b7beb5ef00b5eaab3d7eeaca64849.jpg",
+      "https://ichef.bbci.co.uk/news/640/amz/worldservice/live/assets/images/2015/09/03/150903150823_ancient_hippolyta_amazon_624x351_warnerbros.jpg",
+    ],
   },
   {
     id: "1235",
@@ -35,7 +42,10 @@ const initialState = [
       "solar energy absorption and healing factor, solar flare and heat vision, solar invulnerability, flight...",
     catch_phrase:
       "Look, up in the sky, it's a bird, it's a plane, it's Superman!",
-    images: [],
+    images: [
+      "https://imgtest.mir24.tv/uploaded/images/crops/2018/December/870x489_0x6_detail_crop_f5a363c940799cf0289129b498fd9999437b7beb5ef00b5eaab3d7eeaca64849.jpg",
+      "https://ichef.bbci.co.uk/news/640/amz/worldservice/live/assets/images/2015/09/03/150903150823_ancient_hippolyta_amazon_624x351_warnerbros.jpg",
+    ],
   },
   {
     id: "1236",
@@ -47,7 +57,10 @@ const initialState = [
       "solar energy absorption and healing factor, solar flare and heat vision, solar invulnerability, flight...",
     catch_phrase:
       "Look, up in the sky, it's a bird, it's a plane, it's Superman!",
-    images: [],
+    images: [
+      "https://imgtest.mir24.tv/uploaded/images/crops/2018/December/870x489_0x6_detail_crop_f5a363c940799cf0289129b498fd9999437b7beb5ef00b5eaab3d7eeaca64849.jpg",
+      "https://ichef.bbci.co.uk/news/640/amz/worldservice/live/assets/images/2015/09/03/150903150823_ancient_hippolyta_amazon_624x351_warnerbros.jpg",
+    ],
   },
   {
     id: "1237",
@@ -59,52 +72,26 @@ const initialState = [
       "solar energy absorption and healing factor, solar flare and heat vision, solar invulnerability, flight...",
     catch_phrase:
       "Look, up in the sky, it's a bird, it's a plane, it's Superman!",
-    images: [],
+    images: [
+      "https://imgtest.mir24.tv/uploaded/images/crops/2018/December/870x489_0x6_detail_crop_f5a363c940799cf0289129b498fd9999437b7beb5ef00b5eaab3d7eeaca64849.jpg",
+      "https://ichef.bbci.co.uk/news/640/amz/worldservice/live/assets/images/2015/09/03/150903150823_ancient_hippolyta_amazon_624x351_warnerbros.jpg",
+    ],
   },
 ];
 
-const reducer = (state, action) => {
+const heroListReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_HERO":
-      return { ...state, isLoading: true };
-    case "GET_HEROES":
-      return {
-        ...state,
-        isLoggedIn: true,
-        isLoading: false,
-        currentUser: action.payload,
-      };
-    case "GET_HERO":
-      return {
-        ...state,
-        isLoggedIn: false,
-        currentUser: null,
-      };
-    case "DELETE_HERO":
-      return {
-        ...state,
-        isLoggedIn: false,
-        currentUser: null,
-      };
-    case "EDIT_HERO":
-      return {
-        ...state,
-        isLoggedIn: false,
-        currentUser: null,
-      };
+    case actions.DELETE_HERO:
+      return state.filter(({ id }) => id !== action.payload.id);
+    case actions.ADD_HERO:
+      return [{ ...action.payload }, ...state];
+    case actions.EDIT_HERO:
+      return state.map((hero) =>
+        hero.id === action.payload.id ? action.payload : { ...hero }
+      );
     default:
       return state;
   }
 };
 
-export const MockDataContext = createContext(initialState);
-
-export const MockDataProvider = ({ children }) => {
-  const value = useReducer(reducer, initialState);
-
-  return (
-    <MockDataContext.Provider value={value}>
-      {children}
-    </MockDataContext.Provider>
-  );
-};
+export const store = createStore(heroListReducer);

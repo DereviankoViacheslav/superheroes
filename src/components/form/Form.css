@@ -1,0 +1,36 @@
+.navigation {
+  height: 100%;
+  border-bottom: 5px solid #000;
+}
+
+.navigation__content {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.navigation__links {
+  display: flex;
+  list-style: none;
+}
+
+.navigation__link {
+  margin-right: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navigation__link:last-child {
+  margin-right: 0;
+}
+
+.navigation__link .link:hover {
+  color: rgb(220, 29, 245);
+}
+
+.navigation__link .link {
+  padding: 10px;
+  border-radius: 5px;
+}
